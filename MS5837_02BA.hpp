@@ -157,8 +157,8 @@ private:
   int64_t SENSi = 0;  // 63*(TEMP-2000)^2/2^5
 
   // FROM FINAL CALCULATION
-  int64_t OFF2 = 0;   // OFF*OFFi
-  int64_t SENS2 = 0;  // SENS*SENSi
+  int64_t OFF2 = 0;   // OFF-OFFi
+  int64_t SENS2 = 0;  // SENS-SENSi
   float TEMP2 = 0.0;  //(TEMP-Ti)/100;
   float P2 = 0.0;     //((D1*SENS2/2^21-OFF2)/2^16)/100
 
