@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <string.h>
 #include "MS5837_02BA.hpp"
 MS5837_02BA sensor;
 void setup() {
@@ -6,16 +7,20 @@ void setup() {
   Wire.begin();
   sensor = MS5837_02BA(Wire);
   sensor.update();
-  Serial.print("Current temp:");
-  Serial.println(sensor.get_temperature());
-  Serial.print("Current pressure:");
-  Serial.println(sensor.get_pressure());
 }
 void loop() {
-  // sensor.update();
-  // Serial.print("Current temp:");
-  // Serial.println(sensor.get_temperature());
-  // Serial.print("Current pressure:");
-  // Serial.println(sensor.get_pressure());
-  // delay(1000);
+  char sending_buffer[4] = { 0 };
+  float data_buffer = 0;
+  sensor.update();
+  data_buffer = sensor.get_temperature();
+  memcpy(sending_buffer, &data_buffer, 4);
+  Serial.write(sending_buffer);
+
+  delay(10);
+
+  data_buffer = sensor.get_pressure();
+  memcpy(sending_buffer, &data_buffer, 4);
+  Serial.write(sending_buffer);
+
+  delay(1000);
 }
