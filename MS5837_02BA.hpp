@@ -87,20 +87,20 @@ public:
     P = (((D1 * SENS2) / 2097152l - OFF2) / 32768l);
     TEMP2 = TEMP / 100.0f;
     P2 = P / 100.0f;
-    if ((TEMP2 >= -20.0) && (TEMP2 <= 85.0) && (P2 >= 300) && (P2 <= 1200)) {
-      if (ready < 1)
-        ready += 1;
-    } else {
-      println("\nERROR: sensor data out of range, check sensor status");
-      if ((TEMP2 >= -20.0) && (TEMP2 <= 85.0)) {
-        printf("temperature: %f is out of boundary of -20C ~ +85C", TEMP2);
-        TEMP2 = NAN;
-      }
-      if ((P2 >= 300) && (P2 <= 1200)) {
-        printf("Pressure: %f is out of boundary of 300mbar ~ 1200mbar", P2);
-        P2 = NAN;
-      }
-    }
+    // if ((TEMP2 >= -20.0) && (TEMP2 <= 85.0) && (P2 >= 300) && (P2 <= 1200)) {
+    if (ready < 1)
+      ready += 1;
+    // } else {
+    //   println("\nERROR: sensor data out of range, check sensor status");
+    //   if ((TEMP2 >= -20.0) && (TEMP2 <= 85.0)) {
+    //     printf("temperature: %f is out of boundary of -20C ~ +85C", TEMP2);
+    //     TEMP2 = NAN;
+    //   }
+    //   if ((P2 >= 300) && (P2 <= 1200)) {
+    //     printf("Pressure: %f is out of boundary of 300mbar ~ 1200mbar", P2);
+    //     P2 = NAN;
+    //   }
+    // }
   }
 
   void check_status() {
@@ -157,8 +157,8 @@ private:
   int64_t SENSi = 0;  // 63*(TEMP-2000)^2/2^5
 
   // FROM FINAL CALCULATION
-  int64_t OFF2 = 0;   // OFF-OFFi
-  int64_t SENS2 = 0;  // SENS-SENSi
+  int64_t OFF2 = 0;   // OFF*OFFi
+  int64_t SENS2 = 0;  // SENS*SENSi
   float TEMP2 = 0.0;  //(TEMP-Ti)/100;
   float P2 = 0.0;     //((D1*SENS2/2^21-OFF2)/2^16)/100
 

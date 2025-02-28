@@ -16,11 +16,11 @@ void loop() {
   memcpy(sending_buffer, &data_buffer, 4);
   Serial.write(sending_buffer);
 
-  delay(10);
+  delay(100);
 
   data_buffer = sensor.get_pressure();
   memcpy(sending_buffer, &data_buffer, 4);
   Serial.write(sending_buffer);
 
-  delay(1000);
+  delay(900);
 }
